@@ -1,4 +1,5 @@
 ## SOS2021-26
+## Repositorio individual con el proposito de practicar paralelamente al repo principal
 
 - **Team**
   - [Jose María Maya Cano](https://github.com/josemarimaya)
