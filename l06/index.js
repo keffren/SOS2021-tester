@@ -19,7 +19,7 @@ app.use("/", express.static(path.join(__dirname + "/public")));      // index ->
 
 //Recursos: air_routes, cultyraBASE, hostelries
 
-/*#################################################    Recurso: air_routes    ################################################################*/
+/*#################################################    Recurso: culturaBASE    ################################################################*/
 
 var r_culturaBASE = [
     {
@@ -112,13 +112,11 @@ app.get(BASE_API_PATH + "/hostelries/:urlDistrict", (req,res) => {
     var {urlDistrict} = req.params;    // == var urlDistrict = req.params.urlDistrict
 
     var ls_data = [];
-    var resourceFinded = false;
 
     for (var i = 0 ; i < r_hostelries.length; i++){
         if(r_hostelries[i].district == urlDistrict){
             
             ls_data.push(r_hostelries[i]);
-            resourceFinded = true;
             //console.log(res_data);
         }
     };
@@ -187,11 +185,26 @@ app.delete(BASE_API_PATH + "/hostelries/:urlDistrict/:urlYear", (req,res) => {
         r_hostelries = r_hostelries.filter(resource => (resource.district == urlDistrict)&&(resource.year != urlYear));
         res.status(200).json({ message: `The resources with district : <${urlDistrict}> and year: <${urlYear}> were deleted`})
     }else{
-        res.status(404).json({ message: "District you are looking for does not exist "})
+        res.status(404).json({ message: "The resource you are looking for does not exist "})
     }
 });
 
+//Usar formato json al usar POSTMAN !!!!!!!!!!
+app.put(BASE_API_PATH + "/hostelries/:urlDistrict/:urlYear", (req,res) => {
+    var {urlDistrict} = req.params;
+    var {urlYear} = req.params;
+    //var updatedResource = req.body;
+    const index = r_hostelries.findIndex(resource => (resource.district == urlDistrict)&&(resource.year == urlYear));
+    //console.log(index);
 
+    if(index == -1){
+        res.status(404).json({ message: "The resource you are looking for does not exist "});
+    }else{
+        r_hostelries[index]= req.body;
+        res.status(200).json(r_hostelries[index]);
+    }
+
+});
 
 
 
