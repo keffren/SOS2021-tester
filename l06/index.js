@@ -1,7 +1,7 @@
 //imports
 var express = require("express");
 var path = require("path");
-//var bodyParser = require("body-parser");
+//var bodyParser = require("body-parser"); obsoleto!
 const { json } = require("body-parser");
 
 
@@ -97,6 +97,7 @@ app.put(BASE_API_PATH + "/hostelries", (req,res) => {
     console.log(`Error: Use put method at collector object `);
     res.sendStatus(405);
 });
+
 //DELETE
 app.delete(BASE_API_PATH + "/hostelries",(req,res) => {
     //res.send("DELETE Request Called");
@@ -130,7 +131,6 @@ app.get(BASE_API_PATH + "/hostelries/:urlDistrict", (req,res) => {
    
 });
 
-
 app.get(BASE_API_PATH + "/hostelries/:urlDistrict/:urlYear", (req,res) => {
 
     var {urlDistrict} = req.params;
@@ -158,9 +158,37 @@ app.get(BASE_API_PATH + "/hostelries/:urlDistrict/:urlYear", (req,res) => {
 });
 
 
-app.post(BASE_API_PATH + "/hostelries/Andalucia/2020", (req,res) => {
+app.post(BASE_API_PATH + "/hostelries/:urlDistrict/:urlYear", (req,res) => {
     console.log(`Error: Use post method at element of collector `);
     res.sendStatus(405);
+});
+
+app.delete(BASE_API_PATH + "/hostelries/:urlDistrict", (req,res) => {
+    var {urlDistrict} = req.params;
+
+    const deleted = r_hostelries.find(resource => resource.district == urlDistrict );
+
+    if(deleted){
+        r_hostelries = r_hostelries.filter(resource => resource.district != urlDistrict);
+        res.status(200).json({ message: `The resource with district : <${urlDistrict}> was deleted`})
+    }else{
+        res.status(404).json({ message: "District you are looking for does not exist "})
+    }
+});
+
+
+app.delete(BASE_API_PATH + "/hostelries/:urlDistrict/:urlYear", (req,res) => {
+    var {urlDistrict} = req.params;
+    var {urlYear} = req.params;
+
+    const deleted = r_hostelries.find(resource => (resource.district == urlDistrict)&&(resource.year == urlYear));
+
+    if(deleted){
+        r_hostelries = r_hostelries.filter(resource => (resource.district == urlDistrict)&&(resource.year != urlYear));
+        res.status(200).json({ message: `The resources with district : <${urlDistrict}> and year: <${urlYear}> were deleted`})
+    }else{
+        res.status(404).json({ message: "District you are looking for does not exist "})
+    }
 });
 
 
