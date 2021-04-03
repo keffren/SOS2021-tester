@@ -17,84 +17,64 @@ app.use(express.json());
 //Static navigation
 app.use("/", express.static(path.join(__dirname + "/public")));      // index -> main
 
+
 //Recursos: air_routes, cultyraBASE, hostelries
 
 /*#################################################    Recurso: culturaBASE    ################################################################*/
 
-var r_culturaBASE = [
-    {
-        "district": "Andalucia",
-        "year": 2019,
-        "fundraising": 88.3,
-        "spectator": 16.4,
-        "spending-per-view": 5.4
-    },
-    {
-        "district": "Madrid",
-        "year": 2019,
-        "fundraising": 134.3,
-        "spectator": 20.7,
-        "spending-per-view": 6.5
-    }
-];
-
-app.get(BASE_API_PATH + "/culturaBASE", (req,res)=>{
-
-    res.send(JSON.stringify(r_culturaBASE, null, 2));
-});
-
-//DELETE
-app.delete(BASE_API_PATH + "/culturaBASE", (req, res) => {
-    r_culturaBASE = [];
-    res.sendStatus(200);
-});
-
+var r_culturaBASE = [];
 
 /*#################################################    Recurso: hostelries   ################################################################*/
-var r_hostelries = [
-    {
-        "district"           :   "Andalucia",
-        "year"              :   "2020",
-        "employee_staff"    :   182681,
-        "establishment_open":   17140,
-        "traveler_numer"    :   6841779
-    },
-    {
-        "district"           :   "Andalucia",
-        "year"              :   "2019",
-        "employee_staff"    :   435130,
-        "establishment_open":   29557,
-        "traveler_numer"    :   19869536
-    },
-    {
-        "district"           :   "Catalonia",
-        "year"              :   "2020",
-        "employee_staff"    :   147190,
-        "establishment_open":   14751,
-        "traveler_numer"    :   5787656
-    },
-    {
-        "district"           :   "Catalonia",
-        "year"              :   "2019",
-        "employee_staff"    :   418558,
-        "establishment_open":   27722,
-        "traveler_numer"    :   20752391
-    },
-    {
-        "district"           :   "Catalonia",
-        "year"              :   "2018",
-        "employee_staff"    :   400203,
-        "establishment_open":   27213,
-        "traveler_numer"    :   20045332
-    }
-
-];
-
+var r_hostelries = [];
 
 //Requests of ../hostelries
 //GET
 app.get(BASE_API_PATH + "/hostelries", (req,res) => {
     res.send(JSON.stringify(r_hostelries,null,2));
+});
+
+//LoadInitialDAta
+app.get(BASE_API_PATH + "/hostelries/loadInitialData", (req,res) => {
+    var initialData = [
+        {
+            "district"           :   "Andalucia",
+            "year"              :   "2020",
+            "employee_staff"    :   182681,
+            "establishment_open":   17140,
+            "traveler_numer"    :   6841779
+        },
+        {
+            "district"           :   "Andalucia",
+            "year"              :   "2019",
+            "employee_staff"    :   435130,
+            "establishment_open":   29557,
+            "traveler_numer"    :   19869536
+        },
+        {
+            "district"           :   "Catalonia",
+            "year"              :   "2020",
+            "employee_staff"    :   147190,
+            "establishment_open":   14751,
+            "traveler_numer"    :   5787656
+        },
+        {
+            "district"           :   "Catalonia",
+            "year"              :   "2019",
+            "employee_staff"    :   418558,
+            "establishment_open":   27722,
+            "traveler_numer"    :   20752391
+        },
+        {
+            "district"           :   "Catalonia",
+            "year"              :   "2018",
+            "employee_staff"    :   400203,
+            "establishment_open":   27213,
+            "traveler_numer"    :   20045332
+        }
+    ];
+
+    r_hostelries = initialData;
+    res.status(201).json(r_hostelries);    
 });
 
 //POST
