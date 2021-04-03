@@ -104,28 +104,59 @@ app.delete(BASE_API_PATH + "/hostelries",(req,res) => {
     res.sendStatus(200);
 });
 
-//Request per each resource -> ../Andalucia/2020
-app.get(BASE_API_PATH + "/hostelries/Andalucia/2020", (req,res) => {
-    ls_res = [];
+//Request per each resource ->
+
+app.get(BASE_API_PATH + "/hostelries/:urlDistrict", (req,res) => {
+
+    var {urlDistrict} = req.params;    // == var urlDistrict = req.params.urlDistrict
+
+    var ls_data = [];
+    var resourceFinded = false;
 
     for (var i = 0 ; i < r_hostelries.length; i++){
-        if(r_hostelries[i].district == "Andalucia"){
-            if(r_hostelries[i].year == 2020){
-                ls_res.push(r_hostelries[i]);
-            }
+        if(r_hostelries[i].district == urlDistrict){
+            
+            ls_data.push(r_hostelries[i]);
+            resourceFinded = true;
+            //console.log(res_data);
         }
     };
 
-    res.send(JSON.stringify(ls_res,null,2));
+    if(ls_data.length == 0){
+        res.send('The resource doesn´t exist.')
+    }else{
+        res.send(JSON.stringify(ls_data,null,2));
+    }
+   
 });
 
-app.get(BASE_API_PATH + "/hostelries/:district/:year", (req,res) => {
-    const {district} = req.params.district;
-    const {year} = req.params.year;
-    console.log(JSON.stringify(district,null,2));
-    
 
+app.get(BASE_API_PATH + "/hostelries/:urlDistrict/:urlYear", (req,res) => {
+
+    var {urlDistrict} = req.params;
+    var {urlYear} = req.params;
+
+    var res_data = {}
+    var resourceFinded = false;
+    //console.log(req.params);
+
+    for (var i = 0 ; i < r_hostelries.length; i++){
+        if(r_hostelries[i].district == urlDistrict && r_hostelries[i].year == urlYear){
+            
+            res_data = r_hostelries[i];
+            resourceFinded = true;
+            //console.log(res_data);
+        }
+    };
+
+    if(!resourceFinded){
+        res.send('The resource doesn´t exist.')
+    }else{
+        res.send(JSON.stringify(res_data,null,2));
+    }
+   
 });
+
 
 app.post(BASE_API_PATH + "/hostelries/Andalucia/2020", (req,res) => {
     console.log(`Error: Use post method at element of collector `);
@@ -133,25 +164,11 @@ app.post(BASE_API_PATH + "/hostelries/Andalucia/2020", (req,res) => {
 });
 
 
-/*
-districs_r_hostelries = [];
-for (var i = 0 ; i < r_hostelries.length; i++){
 
-    var url = BASE_API_PATH + "/hostelries";
-    var firstField = r_hostelries[i].distric;
 
-    if (!districs_r_hostelries.includes(firstField)){
-        districs_r_hostelries.push(firstField);
 
-        //create navigation
-        app.get(BASE_API_PATH + "/"+ firstField, (req,res) => {
-            res.send(JSON.stringify(r_hostelries[i],null,2));
-        });
-    }
-    console.log(firstField);
-    console.log(districs_r_hostelries);
 
-}*/
+
 
 
 
