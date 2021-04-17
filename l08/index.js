@@ -34,3 +34,20 @@ app.use("/", express.static(path.join(__dirname + "/public")));
 
 
 //Import API
+var hostelriesAPI = require('./hoslteriesAPI');
+
+//load data into DB
+hostelriesAPI.loadDB(db);
+
+//CRUD
+hostelriesAPI.httpCRUD(app,db);
+
+
+
+
+
+//Server running
+
+app.listen(PORT, () =>{
+    console.log("Server running at port:" + PORT);
+});
