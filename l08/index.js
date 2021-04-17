@@ -1,39 +1,36 @@
+//imports
 var express = require("express");
-var bodyParser = require("body-parser");
+var path = require("path");
+var Datastore = require('nedb');
 
-var PORT = (process.env.PORT || 1607);
-var BASE_API_PATH = "/api/v1";
+const { json } = require("body-parser");
 
+//Attributes
+const PORT = (process.env.PORT || 1607);
+
+
+//Start of the application
 var app = express();
+app.use(express.json());
 
-app.use(bodyParser.json());
+var db = new Datastore();
 
-var contacts = [
-    {
-        "name": "pablo",
-        "phone": 12345
-    },
-    {
-        "name": "pepe",
-        "phone": 6789
-    }
-];
-s
-app.get(BASE_API_PATH+"/contacts", (req,res)=>{
-    res.send(JSON.stringify(contacts,null,2));
- });
-
-app.post(BASE_API_PATH+"/contacts", (req,res)=>{
-    var newContact = req.body;
-    
-    console.log(`new contact to be added: <${JSON.stringify(newContact,null,2)}>`);
-
-    contacts.push(newContact);
-
-    res.sendStatus(201);
- });
+//Static navigation
+app.use("/", express.static(path.join(__dirname + "/public"))); 
 
 
-app.listen(PORT,()=>{
-    console.log(`Server ready at ${PORT}!`);
-});
+
+/*#################################################    Resource: air_routes    ################################################################*/
+
+//Import API
+
+
+/*#################################################    Resource: culturaBASE    ################################################################*/
+
+//Import API
+
+
+/*#################################################    Resource: hostelries    ################################################################*/
+
+
+//Import API
