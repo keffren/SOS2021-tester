@@ -82,4 +82,134 @@ module.exports.httpCRUD = (app, db) => {
     });
     //####################################################################   Request per each resource
 
+    app.get(BASE_HOSTELRIES_API_PATH + "/:urlDistrict", (req,res) => {
+
+        var {urlDistrict} = req.params;        // == var urlDistrict = req.params.urlDistrict
+        
+        db.find({district : urlDistrict}, (err,resources) =>{
+            if(err){
+                console.error(`--HostelriesAPI:\n  ERROR : accessing DB in GET(../hostelries/${urlDistrict})`);
+                res.sendStatus(500);
+            }else{
+                if(Object.keys(resources).length > 0){
+                    var resourcesToSend = resources.map( (r) =>{
+                        delete r._id;   //   ==   delete r["_id"];
+                        return r;
+                    });
+                    res
+                    .status(200)
+                    .json(resourcesToSend);
+                }else{
+                    res
+                    .status(404)
+                    .send('The resource doesn´t exist.');
+                }
+            }
+        })
+    });
+
+    app.get(BASE_HOSTELRIES_API_PATH + "/:urlDistrict/:urlYear", (req,res) => {
+
+        var {urlDistrict} = req.params;        // == var urlDistrict = req.params.urlDistrict
+        var {urlYear} = req.params;
+        
+        db.find({ $and: [{district : urlDistrict}, {year : urlYear}]}, (err,resources) =>{
+            if(err){
+                console.error(`--HostelriesAPI:\n  ERROR : accessing DB in GET(../hostelries/${urlDistrict})`);
+                res.sendStatus(500);
+            }else{
+                if(Object.keys(resources).length > 0){
+                    var resourcesToSend = resources.map( (r) =>{
+                        delete r._id;   //   ==   delete r["_id"];
+                        return r;
+                    });
+                    res
+                    .status(200)
+                    .json(resourcesToSend);
+                }else{
+                    res
+                    .status(404)
+                    .send('The resource doesn´t exist.');
+                }
+            }
+        })
+    });
+
+    app.post(BASE_HOSTELRIES_API_PATH + "/:urlDistrict/:urlYear", (req,res) => {
+        console.error('--HostelriesAPI:\n  ERROR : Method not allowed');
+        res.sendStatus(405);
+    });
+
+    app.delete(BASE_HOSTELRIES_API_PATH + "/:urlDistrict", (req,res) => {
+        var {urlDistrict} = req.params;
+
+        db.remove({district: urlDistrict}, { multi: true }, (err, numRemoved) => {
+            if(err){
+                console.error(`--HostelriesAPI:\n  ERROR : <${err}>`);
+            }else{
+                if(numRemoved == 0){
+                    res
+                    .status(404)
+                    .json({ message: `The collection <${urlDistrict}> doesn´t exist`});
+                }else{
+                    console.log(`--HostelriesAPI:\n  <${numRemoved}> Resources has been deleted`);
+                    res
+                    .status(200)
+                    .json({ message: `<${numRemoved}> Resources have been deleted`});
+                }
+            }
+        });
+    });
+
+    app.delete(BASE_HOSTELRIES_API_PATH + "/:urlDistrict/:urlYear", (req,res) => {
+        var {urlDistrict} = req.params;
+        var {urlYear} = req.params;
+
+        db.remove({ $and: [{district: urlDistrict}, {year: urlYear}]}, {}, (err, numRemoved) => {
+            if(err){
+                console.error(`--HostelriesAPI:\n  ERROR : <${err}>`);
+            }else{
+                if(numRemoved == 0){
+                    res
+                    .status(404)
+                    .json({ message: `<${urlDistrict}/${urlYear}> doesn´t exist`});
+                }else{
+                    console.log(`--HostelriesAPI:\n  <${urlDistrict}/${urlYear}> has been deleted`);
+                    res
+                    .status(200)
+                    .json({ message: `<${urlDistrict}/${urlYear}> has been deleted`});
+                }
+            }
+        });
+    });
+
+    //Select JSON format in  POSTMAN !!!!!!!!!!
+    app.put(BASE_HOSTELRIES_API_PATH + "/:urlDistrict/:urlYear", (req,res) => {
+        var {urlDistrict} = req.params;
+        var {urlYear} = req.params;
+
+        db.update({ $and: [{district: urlDistrict}, {year: urlYear}]},
+            {
+                $set: {employee_staff: req.body.employee_staff,
+                    establishment_open: req.body.establishment_open,
+                    traveler_numer: req.body.traveler_numer}
+            }, {}, (err, numReplaced) => {
+                        if(err){
+                            console.error(`--HostelriesAPI:\n  ERROR : <${err}>`);
+                        }else{
+                            if(numReplaced == 0){
+                                res
+                                .status(404)
+                                .json({ message: "The resource you are looking for does not exist "});
+                            }else{
+                                res
+                                .status(201)
+                                .json(req.body)
+                            }
+                        }
+                    }
+            );
+
+    });
+
 };
