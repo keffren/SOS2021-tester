@@ -1,15 +1,22 @@
 var BASE_HOSTELRIES_API_PATH = "/api/v1/hostelries";
 
-module.exports.loadDB = (db) => {
+module.exports.loadDB = (app, db) => {
     let initData = require ('./initialData');
-    //db.insert(initData);
-    db.insert(initData, (err, dataAdded) => {
-        if(err){
-            console.error('--HostelriesAPI:\n  ERROR : the data hasn´t inserted into DataBase!')
-        }else{
-            console.log('--HostelriesAPI:\n  Data inserted into DataBase')
-        }
-    })
+    
+    app.get(BASE_HOSTELRIES_API_PATH + "/loadInitialData", (req,res) => {
+
+        db.insert(initData, (err, dataAdded) => {
+            if(err){
+                console.error('--HostelriesAPI:\n  ERROR : the data hasn´t inserted into DataBase!');
+                res.sendStatus(500);
+            }else{
+                console.log('--HostelriesAPI:\n  Data inserted into DataBase')
+                res
+                .status(201)
+                .json({ message : `<${dataAdded.length}> Resources has been inserted into DB`});
+            }
+        })
+    });
 };
 
 module.exports.httpCRUD = (app, db) => {
@@ -17,6 +24,8 @@ module.exports.httpCRUD = (app, db) => {
     //####################################################    Requests of ../hostelries
     //GET
     app.get(BASE_HOSTELRIES_API_PATH, (req,res) => {
+
+        console.log(req.query);
         //find the data to send
         db.find({}, (err, resources) => {
             if(err){
@@ -193,23 +202,23 @@ module.exports.httpCRUD = (app, db) => {
                 $set: {employee_staff: req.body.employee_staff,
                     establishment_open: req.body.establishment_open,
                     traveler_numer: req.body.traveler_numer}
-            }, {}, (err, numReplaced) => {
-                        if(err){
-                            console.error(`--HostelriesAPI:\n  ERROR : <${err}>`);
-                        }else{
-                            if(numReplaced == 0){
-                                res
-                                .status(404)
-                                .json({ message: "The resource you are looking for does not exist "});
-                            }else{
-                                res
-                                .status(201)
-                                .json(req.body)
-                            }
-                        }
+            },
+            {},
+            (err, numReplaced) => {
+                if(err){
+                    console.error(`--HostelriesAPI:\n  ERROR : <${err}>`);
+                }else{
+                    if(numReplaced == 0){
+                        res
+                        .status(404)
+                        .json({ message: "The resource you are looking for does not exist "});
+                    }else{
+                        res
+                        .status(200)
+                        .json(req.body)
                     }
-            );
-
+                }
+            }
+        );
     });
-
 };

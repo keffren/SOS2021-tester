@@ -37,7 +37,7 @@ app.use("/", express.static(path.join(__dirname + "/public")));
 var hostelriesAPI = require('./hoslteriesAPI');
 
 //load data into DB
-hostelriesAPI.loadDB(db);
+hostelriesAPI.loadDB(app,db);
 
 //CRUD
 hostelriesAPI.httpCRUD(app,db);
