@@ -47,7 +47,6 @@ hostelriesAPI.httpCRUD(app,db);
 
 
 //Server running
-
 app.listen(PORT, () =>{
     console.log("Server running at port:" + PORT);
 });
