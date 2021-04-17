@@ -5,6 +5,9 @@ module.exports.loadDB = (app, db) => {
     
     app.get(BASE_HOSTELRIES_API_PATH + "/loadInitialData", (req,res) => {
 
+        //In case there are resources
+        db.remove({},{ multi: true });
+
         db.insert(initData, (err, dataAdded) => {
             if(err){
                 console.error('--HostelriesAPI:\n  ERROR : the data hasn´t inserted into DataBase!');
