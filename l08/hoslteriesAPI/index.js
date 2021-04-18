@@ -109,13 +109,26 @@ module.exports.httpCRUD = (app, db) => {
                     res.sendStatus(500);
                 }else{
                     if(Object.keys(resourcesInDB).length == 0){
-                        console.log(`--HostelriesAPI:\n  new resource <${newResource.district}/${newResource.year}> added`)
-                        db.insert(newResource);
-                        res
-                        .status(201)
-                        .json(newResource);
+
+                        if(!newResource.district || !newResource.year ||!newResource.employee_staff || !newResource.establishment_open
+                                || !newResource.traveler_numer || Object.keys(newResource).length != 5){
+
+                                    console.error(`--HostelriesAPI:\n  Post fail -> [400]`);
+                                    res
+                                    .status(400)
+                                    .json({message : 'Bad request, check json params.'})
+                        }else{
+                            console.log(`--HostelriesAPI:\n  new resource <${newResource.district}/${newResource.year}> added`);
+                            db.insert(newResource);
+                            res
+                            .status(201)
+                            .json(newResource);
+                        }                        
                     }else{
-                        res.sendStatus(409);
+                        console.error(`--HostelriesAPI:\n  Post fail -> [409]`);
+                        res
+                        .status(409)
+                        .json({message: 'The resource exists!'});
                     }
                 }
             }
@@ -253,6 +266,13 @@ module.exports.httpCRUD = (app, db) => {
 
         db.update({ $and: [{district: urlDistrict}, {year: urlYear}]},
             {
+                /* In case to set all values of the resource
+                $set: {district :req.body.district,
+                    year : req.body.year,
+                    employee_staff: req.body.employee_staff,
+                    establishment_open: req.body.establishment_open,
+                    traveler_numer: req.body.traveler_numer}
+                */
                 $set: {employee_staff: req.body.employee_staff,
                     establishment_open: req.body.establishment_open,
                     traveler_numer: req.body.traveler_numer}
@@ -261,15 +281,31 @@ module.exports.httpCRUD = (app, db) => {
             (err, numReplaced) => {
                 if(err){
                     console.error(`--HostelriesAPI:\n  ERROR : <${err}>`);
+                    res.sendStatus(500);
                 }else{
                     if(numReplaced == 0){
                         res
                         .status(404)
                         .json({ message: "The resource you are looking for does not exist "});
+
+                    }else if(!req.body.district || !req.body.year || !req.body.employee_staff || !req.body.establishment_open
+                                || !req.body.traveler_numer || Object.keys(req.body).length != 5){
+
+                                    console.error(`--HostelriesAPI:\n  Put fail -> [400]`);
+                                    res
+                                    .status(400)
+                                    .json({message : 'Bad request, check json params.'});
+
+                    }else if (req.body.district != urlDistrict || req.body.year != urlYear){
+                        console.error(`--HostelriesAPI:\n  Put fail -> [409]`);
+                        res
+                        .status(409)
+                        .json({message : 'Conflict, check the resource identifier.'});  
+
                     }else{
                         res
                         .status(200)
-                        .json(req.body)
+                        .json(req.body);
                     }
                 }
             }
