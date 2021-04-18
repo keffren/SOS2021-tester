@@ -27,10 +27,61 @@ module.exports.httpCRUD = (app, db) => {
     //####################################################    Requests of ../hostelries
     //GET
     app.get(BASE_HOSTELRIES_API_PATH, (req,res) => {
-
+        /*
         console.log(req.query);
         //find the data to send
         db.find({}, (err, resources) => {
+            if(err){
+                console.error('--HostelriesAPI:\n  ERROR : accessing DB in GET(../hostelries)');
+                res.sendStatus(500);
+            }else{
+                //res.send(JSON.stringify(resources,null,2));
+                var resourcesToSend = resources.map( (r) =>{
+                    delete r._id;   //   ==   delete r["_id"];
+                    return r;
+                });
+                res
+                .status(200)
+                .json(resourcesToSend);
+            }
+        })*/
+
+        var reqQuery = {};   //Json to save search and paginating params
+
+        //Paginating
+        //offset: a partir de que núm. de elementos quiero que los mande
+        // limit: núm. de recursos de la página que quiero que mande
+        let offset = 0;
+        let limit = Number.MAX_SAFE_INTEGER;
+		
+        if (req.query.offset) {
+            offset = parseInt(req.query.offset);
+            delete req.query.offset;
+        }
+        if (req.query.limit) {
+            limit = parseInt(req.query.limit);
+            delete req.query.limit;
+        }
+
+        //Search = filter
+        if(req.query.district){
+            reqQuery["district"] = req.query.district;
+        }
+        if(req.query.year){
+            reqQuery["year"] = req.query.year;
+        }
+        if(req.query.employee_staff){
+            reqQuery["employee_staff"] = parseInt(req.query.employee_staff);
+        }
+        if(req.query.establishment_open){
+            reqQuery["establishment_open"] = parseInt(req.query.establishment_open);
+        }
+        if(req.query.traveler_numer){
+            reqQuery["traveler_numer"] = parseInt(req.query.traveler_numer);
+        }
+
+        //console.log(reqQuery);
+        db.find(reqQuery).sort({district:1,year:-1}).skip(offset).limit(limit).exec((err,resources) => {
             if(err){
                 console.error('--HostelriesAPI:\n  ERROR : accessing DB in GET(../hostelries)');
                 res.sendStatus(500);
