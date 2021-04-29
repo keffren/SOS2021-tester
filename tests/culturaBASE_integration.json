@@ -1,0 +1,677 @@
+{
+	"info": {
+		"_postman_id": "c18208ad-8d1a-42ca-885f-baad24fdf078",
+		"name": "SOS2021-l08",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "empty o lo que haya en ese momento",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://sos2021-26.herokuapp.com/api/v1/culturaBASE/",
+					"protocol": "https",
+					"host": [
+						"sos2021-26",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"culturaBASE",
+						""
+					]
+				},
+				"description": "this is a simple get that returns the data in this moment"
+			},
+			"response": []
+		},
+		{
+			"name": "load initial",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Kachaw\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://sos2021-26.herokuapp.com/api/v1/culturaBASE/loadInitialData",
+					"protocol": "https",
+					"host": [
+						"sos2021-26",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"culturaBASE",
+						"loadInitialData"
+					]
+				},
+				"description": "upload 5 quick examples for the db"
+			},
+			"response": []
+		},
+		{
+			"name": "prueba busqueda usando 3 recursos",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"1 cosita te voy a decir\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.length).to.eql(1);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://sos2021-26.herokuapp.com/api/v1/culturaBASE/?fundraising=88.3&spectator=16.4&year=2019",
+					"protocol": "https",
+					"host": [
+						"sos2021-26",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"culturaBASE",
+						""
+					],
+					"query": [
+						{
+							"key": "fundraising",
+							"value": "88.3"
+						},
+						{
+							"key": "spectator",
+							"value": "16.4"
+						},
+						{
+							"key": "year",
+							"value": "2019"
+						}
+					]
+				},
+				"description": "search for resource using search for element"
+			},
+			"response": []
+		},
+		{
+			"name": "busqueda usando 2 recursos",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://sos2021-26.herokuapp.com/api/v1/culturaBASE/?fundraising=88.3&spectator=16.4",
+					"protocol": "https",
+					"host": [
+						"sos2021-26",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"culturaBASE",
+						""
+					],
+					"query": [
+						{
+							"key": "fundraising",
+							"value": "88.3"
+						},
+						{
+							"key": "spectator",
+							"value": "16.4"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "prueba usando 1 recursos",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://sos2021-26.herokuapp.com/api/v1/culturaBASE/?fundraising=88.3",
+					"protocol": "https",
+					"host": [
+						"sos2021-26",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"culturaBASE",
+						""
+					],
+					"query": [
+						{
+							"key": "fundraising",
+							"value": "88.3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "prueba paginacion",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://sos2021-26.herokuapp.com/api/v1/culturaBASE/?limit=2&offset=0",
+					"protocol": "https",
+					"host": [
+						"sos2021-26",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"culturaBASE",
+						""
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "2"
+						},
+						{
+							"key": "offset",
+							"value": "0"
+						}
+					]
+				},
+				"description": "example with pagination"
+			},
+			"response": []
+		},
+		{
+			"name": "Busqueda por recurso",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Más rápido que rayo mcquín\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://sos2021-26.herokuapp.com/api/v1/culturaBASE/Andalucia/2019",
+					"protocol": "https",
+					"host": [
+						"sos2021-26",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"culturaBASE",
+						"Andalucia",
+						"2019"
+					]
+				},
+				"description": "search with resource predefined in db and json"
+			},
+			"response": []
+		},
+		{
+			"name": "Recurso que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://sos2021-26.herokuapp.com/api/v1/culturaBASE/Andalucia/2022",
+					"protocol": "https",
+					"host": [
+						"sos2021-26",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"culturaBASE",
+						"Andalucia",
+						"2022"
+					]
+				},
+				"description": "search that return error 404 not found"
+			},
+			"response": []
+		},
+		{
+			"name": "Posteo malo",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 405\", function () {\r",
+							"    pm.response.to.have.status(405);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"district\": \"Andalucia\",\r\n    \"year\": \"2022\",\r\n    \"fundraising\": 88.3333333333,\r\n    \"spectator\": 16.4,\r\n    \"spending_per_view\": 5.4\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sos2021-26.herokuapp.com/api/v1/culturaBASE/Andalucia/2019",
+					"protocol": "https",
+					"host": [
+						"sos2021-26",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"culturaBASE",
+						"Andalucia",
+						"2019"
+					]
+				},
+				"description": "this method is invalid, prove that"
+			},
+			"response": []
+		},
+		{
+			"name": "Falta un parametro 400",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"district\": \"Andalucia\",\r\n    \"year\": \"2022\",\r\n    \"fundraising\": 88.3333333333,\r\n    \"spectator\": 16.4\r\n    \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sos2021-26.herokuapp.com/api/v1/culturaBASE/",
+					"protocol": "https",
+					"host": [
+						"sos2021-26",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"culturaBASE",
+						""
+					]
+				},
+				"description": "invalid post, lack of atributes"
+			},
+			"response": []
+		},
+		{
+			"name": "posteo un recurso",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"district\": \"Andalucia\",\r\n    \"year\": \"2022\",\r\n    \"fundraising\": 88.3333333333,\r\n    \"spectator\": 16.4,\r\n    \"spending_per_view\": 5.4\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sos2021-26.herokuapp.com/api/v1/culturaBASE/",
+					"protocol": "https",
+					"host": [
+						"sos2021-26",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"culturaBASE",
+						""
+					]
+				},
+				"description": "valid post"
+			},
+			"response": []
+		},
+		{
+			"name": "posteo un recurso existente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 409\", function () {\r",
+							"    pm.response.to.have.status(409);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"district\": \"Andalucia\",\r\n    \"year\": \"2022\",\r\n    \"fundraising\": 88.3333333333,\r\n    \"spectator\": 16.4,\r\n    \"spending_per_view\": 5.4\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sos2021-26.herokuapp.com/api/v1/culturaBASE/",
+					"protocol": "https",
+					"host": [
+						"sos2021-26",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"culturaBASE",
+						""
+					]
+				},
+				"description": "invalid post, resource is existing right now"
+			},
+			"response": []
+		},
+		{
+			"name": "delete por recurso",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://sos2021-26.herokuapp.com/api/v1/culturaBASE/Andalucia/2018",
+					"protocol": "https",
+					"host": [
+						"sos2021-26",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"culturaBASE",
+						"Andalucia",
+						"2018"
+					]
+				},
+				"description": "succesful delete for params"
+			},
+			"response": []
+		},
+		{
+			"name": "put",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"district\": \"Andalucia\",\r\n    \"year\": \"2019\",\r\n    \"fundraising\": 88.3333333333333,\r\n    \"spectator\": 16.4,\r\n    \"spending_per_view\": 5.4\r\n }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sos2021-26.herokuapp.com/api/v1/culturaBASE/Andalucia/2019",
+					"protocol": "https",
+					"host": [
+						"sos2021-26",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"culturaBASE",
+						"Andalucia",
+						"2019"
+					]
+				},
+				"description": "succesful put"
+			},
+			"response": []
+		},
+		{
+			"name": "delete entero",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://sos2021-26.herokuapp.com/api/v1/culturaBASE/",
+					"protocol": "https",
+					"host": [
+						"sos2021-26",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"culturaBASE",
+						""
+					]
+				},
+				"description": "absolutetly delete"
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "HOST",
+			"value": "localhost"
+		},
+		{
+			"key": "PORT",
+			"value": "1607"
+		}
+	]
+}
