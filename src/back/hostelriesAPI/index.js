@@ -1,7 +1,13 @@
-var BASE_HOSTELRIES_API_PATH = "/api/v1/hostelries";
+module.exports = function(app){
 
-module.exports.loadDB = (app, db) => {
+    const BASE_HOSTELRIES_API_PATH = "/api/v1/hostelries";
     let initData = require ('./initialData');
+
+    var Datastore = require('nedb');
+    const db = new Datastore();
+
+
+    //####################################################    Load JSON into DB
     
     app.get(BASE_HOSTELRIES_API_PATH + "/loadInitialData", (req,res) => {
 
@@ -20,9 +26,6 @@ module.exports.loadDB = (app, db) => {
             }
         })
     });
-};
-
-module.exports.httpCRUD = (app, db) => {
 
     //####################################################    Requests of ../hostelries
     //GET
@@ -311,4 +314,5 @@ module.exports.httpCRUD = (app, db) => {
             }
         );
     });
-};
+
+}

@@ -1,3 +1,4 @@
+//renombrar : main -> index  => Formalizar/Estandarizar
 import App from './App.svelte';
 
 const app = new App({
