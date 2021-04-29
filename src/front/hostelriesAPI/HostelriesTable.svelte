@@ -14,6 +14,8 @@
 
     let r_hostelries = []
 
+    // ¿fetch? => https://developer.mozilla.org/es/docs/Web/API/Fetch_API/Using_Fetch
+
     async function getHostelryResource(){
         console.log("--HostelriesAPI:\n  FrontEnd -> Fetching resource..");
         const res = await fetch("/api/v1/hostelries");
