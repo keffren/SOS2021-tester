@@ -5,9 +5,11 @@
 
 	import Home from './Home.svelte';
 	import CulturaBASE from './culturaBASEAPI/CulturaBASE.svelte';
-	import Hostelries from './hostelriesAPI/Hostelries.svelte';
-	import AirRoutes from './airRoutesAPI/AirRoutes.svelte';
 
+	import Hostelries from './hostelriesAPI/Hostelries.svelte';
+	import EditHostelryResource from './hostelriesAPI/editHostelryR.svelte';
+
+	import AirRoutes from './airRoutesAPI/AirRoutes.svelte';
 	import NotFound from './NotFound.svelte';
 
 
@@ -17,9 +19,15 @@
 	*/
 	const routes = {
 		'/': Home,
+
+		//Hostelries API
 		'/hostelries': Hostelries,
+		'/hostelries/:district/:year': EditHostelryResource, 
+		//CulturaBAse API
 		'/culturaBASE': CulturaBASE,
+		//AirRoutes API
 		'/airRoutes': AirRoutes,
+		
 		'*': NotFound
 	};
 </script>
