@@ -21,7 +21,7 @@ module.exports = function(app){
             }else{
                 console.log('--HostelriesAPI:\n  Data inserted into DataBase')
                 res
-                .status(201)
+                .status(200)
                 .json({ message : `<${dataAdded.length}> Resources has been inserted into DB`});
             }
         })

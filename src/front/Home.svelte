@@ -4,9 +4,9 @@
         <li>
             <b> Equipo 26</b>
             <ul>
-                <li><a href = "https://github.com/josemarimaya" > Jose María Maya Cano </a></li>
-                <li><a href = " https://github.com/keffren " > Mateo Serna Giraldo </a></li>
-                <li><a href = " https://github.com/darlopvil " > Darío López Villegas </a></li>
+                <li><a href = "https://github.com/josemarimaya" > Jose María Maya Cano - culturaBASE</a></li>
+                <li><a href = " https://github.com/keffren " > Mateo Serna Giraldo - hostelries</a></li>
+                <li><a href = " https://github.com/darlopvil " > Darío López Villegas - air_routes </a></li>
             </ul>
         </li><br>
 
@@ -23,6 +23,10 @@
                 </li>
                 <li>
                     <a href= "#/airRoutes"> Vuelos comerciales</a>
+                </li>
+
+                <li>
+                    <a href="#/datagraph"> Grafica con todos los datos</a>
                 </li>
             </ul>
         </li><br>
@@ -41,7 +45,7 @@
             <b>APIs:</b>
             <ul>
                 <li>
-                    <a href="https://sos2021-26.herokuapp.com/api/v1/culturaBASE/">https://sos2021-26.herokuapp.com/api/v1/culturaBASE/</a> 
+                    <a href="https://sos2021-26.herokuapp.com/api/v2/culturaBASE/">https://sos2021-26.herokuapp.com/api/v2/culturaBASE/</a> 
                     (desarrollado por <a href="https://github.com/josemarimaya">José María Maya Cano</a>)
                 </li>
                 <li>
@@ -49,7 +53,7 @@
                     (desarrollado por <a href="https://github.com/darlopvil">Darío López Villegas</a>)
                 </li>
                 <li>
-                    <a href="https://sos2021-26.herokuapp.com/api/v1/hostelries/">https://sos2021-26.herokuapp.com/api/v1/hostelries/</a> 
+                    <a href="https://sos2021-26.herokuapp.com/api/v2/hostelries/">https://sos2021-26.herokuapp.com/api/v2/hostelries/</a> 
                     (desarrollado por <a href="https://github.com/keffren">Mateo Serna Giraldo</a>)
                 </li>
             </ul>
@@ -71,10 +75,19 @@
                 </li>
 
                 <li>
-                    <a href="https://documenter.getpostman.com/view/9628248/TzJsfJT2"> Ddesarrollado por </a> <a href="https://github.com/josemarimaya"><b>José María Maya Cano</b></a> 
+                    <a href="https://documenter.getpostman.com/view/9628248/TzJsfJT2"> V1 Desarrollado por </a> <a href="https://github.com/josemarimaya"><b>José María Maya Cano</b></a> 
                 </li>
+
                 <li>
-                    <a href="https://documenter.getpostman.com/view/14948205/TzJsfJSz"> Desarrollado por </a> <a href="https://github.com/keffren"><b>Mateo Serna Giraldo</b></a>
+                    <a href="https://documenter.getpostman.com/view/9628248/TzRRE9Fe">V2 Desarrollado por </a> <a href="https://github.com/josemarimaya"><b>José María Maya Cano</b></a> 
+                </li>
+                
+                <li>
+                    <a href="https://documenter.getpostman.com/view/14948205/TzJsfJSz"> V1 Desarrollado por </a> <a href="https://github.com/keffren"><b>Mateo Serna Giraldo</b></a>
+                </li>
+
+                <li>
+                    <a href="https://documenter.getpostman.com/view/14948205/TzRU9Rje"> V2 Desarrollado por </a> <a href="https://github.com/keffren"><b>Mateo Serna Giraldo</b></a>
                 </li>
             </ul>
         </li>

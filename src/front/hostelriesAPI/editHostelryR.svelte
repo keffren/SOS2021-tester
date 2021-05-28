@@ -13,7 +13,7 @@
     import Table from "sveltestrap/src/Table.svelte";
     import Button from "sveltestrap/src/Button.svelte";
 
-    const BASE_HOSTELRIES_API_PATH = "/api/v1/hostelries";
+    const BASE_HOSTELRIES_API_PATH = "/api/v2/hostelries";
     let successMessage = "";
 
     //VALUES to update
@@ -44,7 +44,8 @@
 
             console.log(`--HostelriesAPI:\n  FrontEnd -> Resource received `);
         }else{
-            console.log("--HostelriesAPI:\n  FrontEnd -> Error");
+            console.log("--HostelriesAPI:\n  FrontEnd -> Error"+res.statusText);
+
         }   
     }
 

@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "c18208ad-8d1a-42ca-885f-baad24fdf078",
-		"name": "SOS2021-l08",
+		"_postman_id": "ead29a40-5859-40cc-a552-085ea6f70b14",
+		"name": "SOS2021-D2",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -24,7 +24,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://sos2021-26.herokuapp.com/api/v1/culturaBASE/",
+					"raw": "https://sos2021-26.herokuapp.com/api/v2/culturaBASE/",
 					"protocol": "https",
 					"host": [
 						"sos2021-26",
@@ -33,7 +33,7 @@
 					],
 					"path": [
 						"api",
-						"v1",
+						"v2",
 						"culturaBASE",
 						""
 					]
@@ -67,7 +67,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://sos2021-26.herokuapp.com/api/v1/culturaBASE/loadInitialData",
+					"raw": "https://sos2021-26.herokuapp.com/api/v2/culturaBASE/loadInitialData",
 					"protocol": "https",
 					"host": [
 						"sos2021-26",
@@ -76,7 +76,50 @@
 					],
 					"path": [
 						"api",
-						"v1",
+						"v2",
+						"culturaBASE",
+						"loadInitialData"
+					]
+				},
+				"description": "upload 5 quick examples for the db"
+			},
+			"response": []
+		},
+		{
+			"name": "load initial Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Kachaw\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://sos2021-26.herokuapp.com/api/v2/culturaBASE/loadInitialData",
+					"protocol": "https",
+					"host": [
+						"sos2021-26",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v2",
 						"culturaBASE",
 						"loadInitialData"
 					]
@@ -109,7 +152,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://sos2021-26.herokuapp.com/api/v1/culturaBASE/?fundraising=88.3&spectator=16.4&year=2019",
+					"raw": "https://sos2021-26.herokuapp.com/api/v2/culturaBASE/?fundraising=88.3&spectator=16.4&year=2019",
 					"protocol": "https",
 					"host": [
 						"sos2021-26",
@@ -118,7 +161,7 @@
 					],
 					"path": [
 						"api",
-						"v1",
+						"v2",
 						"culturaBASE",
 						""
 					],
@@ -160,7 +203,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://sos2021-26.herokuapp.com/api/v1/culturaBASE/?fundraising=88.3&spectator=16.4",
+					"raw": "https://sos2021-26.herokuapp.com/api/v2/culturaBASE/?fundraising=88.3&spectator=16.4",
 					"protocol": "https",
 					"host": [
 						"sos2021-26",
@@ -169,7 +212,7 @@
 					],
 					"path": [
 						"api",
-						"v1",
+						"v2",
 						"culturaBASE",
 						""
 					],
@@ -184,6 +227,54 @@
 						}
 					]
 				}
+			},
+			"response": []
+		},
+		{
+			"name": "busqueda de años por intervalo",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"pm.test(\"Kachaw\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://sos2021-26.herokuapp.com/api/v2/culturaBASE/?from=2017&to=2018",
+					"protocol": "https",
+					"host": [
+						"sos2021-26",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v2",
+						"culturaBASE",
+						""
+					],
+					"query": [
+						{
+							"key": "from",
+							"value": "2017"
+						},
+						{
+							"key": "to",
+							"value": "2018"
+						}
+					]
+				},
+				"description": "this is a search with two resources"
 			},
 			"response": []
 		},
@@ -225,7 +316,8 @@
 							"value": "88.3"
 						}
 					]
-				}
+				},
+				"description": "search with temporal loop"
 			},
 			"response": []
 		},
@@ -299,7 +391,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://sos2021-26.herokuapp.com/api/v1/culturaBASE/Andalucia/2019",
+					"raw": "https://sos2021-26.herokuapp.com/api/v2/culturaBASE/Andalucia/2019",
 					"protocol": "https",
 					"host": [
 						"sos2021-26",
@@ -308,7 +400,7 @@
 					],
 					"path": [
 						"api",
-						"v1",
+						"v2",
 						"culturaBASE",
 						"Andalucia",
 						"2019"
@@ -337,7 +429,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://sos2021-26.herokuapp.com/api/v1/culturaBASE/Andalucia/2022",
+					"raw": "https://sos2021-26.herokuapp.com/api/v2/culturaBASE/Andalucia/2022",
 					"protocol": "https",
 					"host": [
 						"sos2021-26",
@@ -346,7 +438,7 @@
 					],
 					"path": [
 						"api",
-						"v1",
+						"v2",
 						"culturaBASE",
 						"Andalucia",
 						"2022"
@@ -384,7 +476,7 @@
 					}
 				},
 				"url": {
-					"raw": "https://sos2021-26.herokuapp.com/api/v1/culturaBASE/Andalucia/2019",
+					"raw": "https://sos2021-26.herokuapp.com/api/v2/culturaBASE/Andalucia/2019",
 					"protocol": "https",
 					"host": [
 						"sos2021-26",
@@ -393,7 +485,7 @@
 					],
 					"path": [
 						"api",
-						"v1",
+						"v2",
 						"culturaBASE",
 						"Andalucia",
 						"2019"
@@ -431,7 +523,7 @@
 					}
 				},
 				"url": {
-					"raw": "https://sos2021-26.herokuapp.com/api/v1/culturaBASE/",
+					"raw": "https://sos2021-26.herokuapp.com/api/v2/culturaBASE/",
 					"protocol": "https",
 					"host": [
 						"sos2021-26",
@@ -440,7 +532,7 @@
 					],
 					"path": [
 						"api",
-						"v1",
+						"v2",
 						"culturaBASE",
 						""
 					]
@@ -477,7 +569,7 @@
 					}
 				},
 				"url": {
-					"raw": "https://sos2021-26.herokuapp.com/api/v1/culturaBASE/",
+					"raw": "https://sos2021-26.herokuapp.com/api/v2/culturaBASE/",
 					"protocol": "https",
 					"host": [
 						"sos2021-26",
@@ -486,7 +578,7 @@
 					],
 					"path": [
 						"api",
-						"v1",
+						"v2",
 						"culturaBASE",
 						""
 					]
@@ -523,7 +615,7 @@
 					}
 				},
 				"url": {
-					"raw": "https://sos2021-26.herokuapp.com/api/v1/culturaBASE/",
+					"raw": "https://sos2021-26.herokuapp.com/api/v2/culturaBASE/",
 					"protocol": "https",
 					"host": [
 						"sos2021-26",
@@ -532,7 +624,7 @@
 					],
 					"path": [
 						"api",
-						"v1",
+						"v2",
 						"culturaBASE",
 						""
 					]
@@ -560,7 +652,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "https://sos2021-26.herokuapp.com/api/v1/culturaBASE/Andalucia/2018",
+					"raw": "https://sos2021-26.herokuapp.com/api/v2/culturaBASE/Andalucia/2018",
 					"protocol": "https",
 					"host": [
 						"sos2021-26",
@@ -569,7 +661,7 @@
 					],
 					"path": [
 						"api",
-						"v1",
+						"v2",
 						"culturaBASE",
 						"Andalucia",
 						"2018"
@@ -607,7 +699,7 @@
 					}
 				},
 				"url": {
-					"raw": "https://sos2021-26.herokuapp.com/api/v1/culturaBASE/Andalucia/2019",
+					"raw": "https://sos2021-26.herokuapp.com/api/v2/culturaBASE/Andalucia/2019",
 					"protocol": "https",
 					"host": [
 						"sos2021-26",
@@ -616,7 +708,7 @@
 					],
 					"path": [
 						"api",
-						"v1",
+						"v2",
 						"culturaBASE",
 						"Andalucia",
 						"2019"
@@ -645,7 +737,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "https://sos2021-26.herokuapp.com/api/v1/culturaBASE/",
+					"raw": "https://sos2021-26.herokuapp.com/api/v2/culturaBASE/",
 					"protocol": "https",
 					"host": [
 						"sos2021-26",
@@ -654,7 +746,7 @@
 					],
 					"path": [
 						"api",
-						"v1",
+						"v2",
 						"culturaBASE",
 						""
 					]

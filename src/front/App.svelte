@@ -4,10 +4,17 @@
 	import Router from 'svelte-spa-router';
 
 	import Home from './Home.svelte';
-	import CulturaBASE from './culturaBASEAPI/CulturaBASE.svelte';
 
+	//Imports of CulturaBASE
+	import CulturaBASE from './culturaBASEAPI/CulturaBASE.svelte';
+	import CulturaBASEDistrict from './culturaBASEAPI/EditCulturaBase.svelte';
+	import GraphCB from './culturaBASEAPI/MyGraph.svelte';
+	import DataGraph from './DataGraph.svelte';
+
+	//Imports of Hostelries
 	import Hostelries from './hostelriesAPI/Hostelries.svelte';
 	import EditHostelryResource from './hostelriesAPI/editHostelryR.svelte';
+	import GraphHostelry from './hostelriesAPI/MyGraph.svelte';
 
 	import AirRoutes from './airRoutesAPI/AirRoutes.svelte';
 	import NotFound from './NotFound.svelte';
@@ -18,13 +25,20 @@
 		and the value is the route object.
 	*/
 	const routes = {
+		'/info': Home,
 		'/': Home,
-
+		'/datagraph': DataGraph,
+		
 		//Hostelries API
 		'/hostelries': Hostelries,
-		'/hostelries/:district/:year': EditHostelryResource, 
+		'/hostelries/:district/:year': EditHostelryResource,
+		'/hostelries/graph' : GraphHostelry,
+
 		//CulturaBAse API
 		'/culturaBASE': CulturaBASE,
+		'/culturaBASE/:district/:year': CulturaBASEDistrict,
+		'/culturaBASE/graph': GraphCB,
+		
 		//AirRoutes API
 		'/airRoutes': AirRoutes,
 		

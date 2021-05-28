@@ -19,8 +19,15 @@ app.use("/", express.static(path.join(__dirname + "/public")));
 //####################################### BACK-END 
 
 //Hostelry API
-const hostelryBackAPI = require('./src/back/hostelriesAPI/index');
+const hostelryBackAPI = require('./src/back/hostelriesAPI/v2/index');
 hostelryBackAPI(app);
+
+//CulturaBASE API
+
+const culturaBASEBackAPI = require('./src/back/culturaBASEAPI/v1/index');
+const culturaBASEBackAPI2 = require('./src/back/culturaBASEAPI/v2/index');
+culturaBASEBackAPI(app);
+culturaBASEBackAPI2(app);
 
 //####################################### FRONT-END
 

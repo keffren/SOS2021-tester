@@ -31,6 +31,41 @@ var culturabaseData = [
         "fundraising": 0.6,
         "spectator": 0.1,
         "spending_per_view": 5.1
+    },
+    {
+        "district": "Ceuta y Melilla",
+        "year": "2018",
+        "fundraising": 0.7,
+        "spectator": 0.1,
+        "spending_per_view": 5.1
+    },
+    {
+        "district": "Aragón",
+        "year": "2019",
+        "fundraising": 15.1,
+        "spectator": 2.8,
+        "spending_per_view": 5.3
+    },
+    {
+        "district": "Aragón",
+        "year": "2018",
+        "fundraising": 14.5,
+        "spectator": 2.8,
+        "spending_per_view": 5.3
+    },
+    {
+        "district": "Navarra",
+        "year": "2019",
+        "fundraising": 8.5,
+        "spectator": 1.6,
+        "spending_per_view": 5.4
+    },
+    {
+        "district": "Navarra",
+        "year": "2018",
+        "fundraising": 8.5,
+        "spectator": 1.6,
+        "spending_per_view": 5.5
     }
 ];
 
